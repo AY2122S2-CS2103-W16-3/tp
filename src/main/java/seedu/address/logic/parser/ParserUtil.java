@@ -9,11 +9,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.group.GroupName;
+import seedu.address.model.person.AcademicMajor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.TaskName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -71,13 +73,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static AcademicMajor parseAcademicMajor(String academicMajor) throws ParseException {
+        requireNonNull(academicMajor);
+        String trimmedAcademicMajor = academicMajor.trim();
+        if (!AcademicMajor.isValidAcademicMajor(trimmedAcademicMajor)) {
+            throw new ParseException(AcademicMajor.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new AcademicMajor(trimmedAcademicMajor);
     }
 
     /**
@@ -120,5 +122,35 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String groupName} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code groupName} is invalid.
+     */
+    public static GroupName parseGroupName(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedName = groupName.trim();
+        if (!GroupName.isValidGroupName(trimmedName)) {
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String task} into a {@code Task}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code groupName} is invalid.
+     */
+    public static TaskName parseTaskName(String taskName) throws ParseException {
+        requireNonNull(taskName);
+        String trimmedName = taskName.trim();
+        if (!TaskName.isValidTaskName(trimmedName)) {
+            throw new ParseException(TaskName.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskName(trimmedName);
     }
 }

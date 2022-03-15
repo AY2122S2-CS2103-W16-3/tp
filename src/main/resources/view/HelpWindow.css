@@ -1,19 +1,33 @@
 #copyButton, #helpMessage {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: #FF7979;
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: #E16B6B;
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: #FF7979;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#F3F4F7, 20%);
+}
+
+#listCommand {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#listCommand.label, #exitCommand.label ,#addCommand.label, #addGroupCommand.label, #assignCommand.label, #addTaskCommand.label, #viewTaskCommand.label {
+    -fx-text-fill: white;
+    -fx-background-color: #8A88FF;
+    -fx-padding: 2 10 2 10;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-size: 14;
 }

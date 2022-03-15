@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -13,6 +15,9 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -58,16 +63,46 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    boolean hasGroup(Group group);
+
+    /**
+     * Returns true if a task with the same identity as {@code task} in a specified group exists in the address book.
+     */
+    boolean hasTask(Task task, Group group);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
 
     /**
+     * Deletes the given group.
+     * The group must exist in the address book.
+     */
+    void deleteGroup(Group group);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given group.
+     * {@code group} must not already exist in the address book.
+     */
+    void addGroup(Group group);
+
+    /**
+     * Adds the task into the specified group.
+     * {@code group} must already exist in the address book.
+     * {@code task} must not already exist in the specified {@code group} in the address book.
+     *
+     */
+    void addTask(Task task, Group group);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -79,9 +114,18 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered group list */
+    ObservableList<Group> getFilteredGroupList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
 }
